@@ -10,13 +10,13 @@ import (
 )
 
 type Component struct {
-	dirName    string
-	percentage float32
-	statements uint32
-	files      uint32
+	DirName    string
+	Percentage float32
+	Statements uint32
+	Files      uint32
 }
 
-func analyzeComponentsSize(rootDirName string, statementChar string) ([]Component, error) {
+func AnalyzeComponentsSize(rootDirName string, statementChar string) ([]Component, error) {
 	var results []Component
 
 	currentDir := ""
@@ -32,25 +32,25 @@ func analyzeComponentsSize(rootDirName string, statementChar string) ([]Componen
 		}
 
 		if info.IsDir() {
-			if len(component.dirName) != 0 {
+			if len(component.DirName) != 0 {
 				results = append(results, component)
 			}
 
 			component = Component{}
 			dirName := path
-			component.dirName = dirName
+			component.DirName = dirName
 			currentDir = dirName
 		} else {
-			if len(component.dirName) == 0 {
+			if len(component.DirName) == 0 {
 				return nil
 			}
-			component.files++
+			component.Files++
 			statements, err := countOccurences(path, statementChar)
 			if err != nil {
 				fmt.Printf("error in countOccureneces: %v\n", err)
 				return err
 			}
-			component.statements += statements
+			component.Statements += statements
 		}
 
 		return nil
