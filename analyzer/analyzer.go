@@ -10,10 +10,16 @@ import (
 )
 
 type Component struct {
-	DirName    string
-	Percentage float32
-	Statements uint32
-	Files      uint32
+	ComponentName string
+	NameSpace     string
+	Percentage    float32
+	Statements    uint32
+	Files         uint32
+}
+
+func getLastPath(pathName string) string {
+	paths := strings.Split(pathName, "/")
+	return paths[len(paths)-1]
 }
 
 func AnalyzeComponentsSize(rootDirName string, statementChar string) ([]Component, error) {
@@ -32,16 +38,17 @@ func AnalyzeComponentsSize(rootDirName string, statementChar string) ([]Componen
 		}
 
 		if info.IsDir() {
-			if len(component.DirName) != 0 {
+			if len(component.ComponentName) != 0 {
 				results = append(results, component)
 			}
 
 			component = Component{}
-			dirName := path
-			component.DirName = dirName
-			currentDir = dirName
+			componentName := getLastPath(path)
+			component.ComponentName = componentName
+			component.NameSpace = path
+			currentDir = componentName
 		} else {
-			if len(component.DirName) == 0 {
+			if len(component.ComponentName) == 0 {
 				return nil
 			}
 			component.Files++

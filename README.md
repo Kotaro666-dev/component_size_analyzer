@@ -42,9 +42,9 @@ path: result.csv
 
 ```csv
 コンポーネント名, 名前空間, パーセント, 総ステートメント数, ファイル数
-componentA, 0.11, 9, 1
-componentB, 0.46, 38, 4
-componentC, 0.00, 0, 0
-componentD, 0.75, 62, 1
+componentA, namespace.componentA, 0.11, 9, 1
+componentB, namespace.componentB, 0.46, 38, 4
+componentC, namespace.componentC, 2.10, 321, 10
+componentD, namespace.componentD, 0.75, 62, 1
 ...
 ```

@@ -41,7 +41,7 @@ func ResultsToFile(results *[]Analyzer.Component) error {
 
 	calculatePercentage(results)
 	for _, result := range *results {
-		_, err := file.WriteString(fmt.Sprintf("%s, %.2f, %d, %d\n", result.DirName, result.Percentage, result.Statements, result.Files))
+		_, err := file.WriteString(fmt.Sprintf("%s, %s, %.2f, %d, %d\n", result.ComponentName, result.NameSpace, result.Percentage, result.Statements, result.Files))
 		if err != nil {
 			return err
 		}
